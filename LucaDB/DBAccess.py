@@ -159,8 +159,8 @@ def OpcTransLog_Select(ConnObj, No_Of_Days):
     try:
         CursorObj = ConnObj.cursor()
 
-        sqlite_opctranslog_select_qry = """SELECT SID, OPC_TAG, TAG_VALUE, TAG_STATUS, LOAD_TIMESTAMP FROM OPC_TRANS_LOG """ \
-                                        "WHERE (LOAD_TIMESTAMP) > DATETIME('now','-" + str(No_Of_Days) + " day')"""
+        sqlite_opctranslog_select_qry = """SELECT SID, OPC_TAG, TAG_VALUE, TAG_STATUS, OPC_TIMESTAMP FROM OPC_TRANS_LOG """ \
+                                        "WHERE (READREQ_TIMESTAMP) > DATETIME('now','-" + str(No_Of_Days) + " day')"""
 
         print(sqlite_opctranslog_select_qry)
 
@@ -182,7 +182,7 @@ def OpcTransLog_Purge(ConnObj, input_date):
     db_msg = ''
     format = '%Y-%m-%d'  # suitable  format
     input_date = datetime.strptime(input_date, format)
-    Delete_Sql = "DELETE FROM OPC_TRANS_LOG WHERE DATE(LOAD_DATETIME) <= ? "
+    Delete_Sql = "DELETE FROM OPC_TRANS_LOG WHERE DATE(READREQ_TIMESTAMP) <= ? "
     param = [input_date]
 
     try:

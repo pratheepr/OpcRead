@@ -1,1 +1,1 @@
-C:\Users\Pratheep\AppData\Local\Programs\Python\Python38-32/python -m PyInstaller --hiddenimport win32timezone -F opcread.py
+C:\Users\prath\AppData\Local\Programs\Python\Python39-32/python -m PyInstaller --hiddenimport win32timezone -F /opcread.py

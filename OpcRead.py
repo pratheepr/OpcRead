@@ -1,3 +1,5 @@
+import os
+
 import pywintypes
 import OpenOPC
 import sys
@@ -157,7 +159,6 @@ if __name__ == "__main__":
                     print(f'Distinct error tags are : {lst_err_tags}  ')
                     print(' ************************************** :')
 
-
                 # Write_To_Files(ctr=ctr, df_write=df, opc_read_output_filename=opc_read_output_filename)
 
             except Exception as e:
@@ -165,9 +166,11 @@ if __name__ == "__main__":
                 print(e)
 
         ctr = ctr + 1
+        os.system('taskkill /f /im hcitrs.exe')
+        # taskkill /f /im "devenv.exe"
         tm.sleep(sleep_duration_in_secs)
 
-        if ctr % 5 == 0 or Error_Tag_Found == 1:
+        if ctr % 5 == 0 and Error_Tag_Found == 1:
             tag_list = tags_listing(DBConnObj=DbConnObj, nof_tags_per_line=tag_listing_per_call,
                                     err_tag_list=lst_err_tags)
             print(f'********************Tags Selected are: {tag_list}')
